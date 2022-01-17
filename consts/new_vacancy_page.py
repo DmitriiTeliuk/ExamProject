@@ -1,0 +1,18 @@
+class NewVacancyPageConsts:
+    JOB_TITLE_XPATH = "//input[@name='position']"
+    NOT_IT_RADIO_BUTTON = "//input[@id='noItLabel']//parent::div"
+    CLIENT_FIELD_XPATH = "//div[@id='s2id_clientAutocompleater']"
+    CLIENT_AUTOCOMPLETE_FIELD_XPATH = "//input[@id='s2id_autogen2_search']"
+    CLIENTS_LIST_XPATH = "//li[@role='presentation']"
+    CLIENT_ITEM_IN_LIST_XPATH = "//div[@class='select2-result-label' and text()='{client}']"
+    SELECT_CATEGORY_FIELD_XPATH = "//span[@translate='Select category']"
+    EMPLOYMENT_TYPE_FIELD_XPATH = "//span[@translate='Select employment type']"
+    EMPLOYMENT_TYPE_OPTION_XPATH = "//div[contains(text(),'{type}')]"
+    COUNTRY_FIELD_XPATH = "//div[@id='s2id_1_country_container']"
+    COUNTRY_ITEM_IN_LIST_XPATH = "//div[@class='select2-result-label' and contains(text(),'{country}')]"
+    CITY_FIELD_XPATH = "//div[@id='s2id_1_city_container']"
+    CITY_ITEM_IN_LIST_XPATH = "//div[@class='select2-result-label' and contains(text(),'{city}')]"
+    DESCRIPTION_FIELD_IFRAME_XPATH = "//div[@id ='vacancyPageDescriptionAnchor']//iframe"
+    # use BODY_IN_IFRAME_XPATH after switch to iframe that is needed
+    BODY_IN_IFRAME_XPATH = "//html/body[@contenteditable='true']"
+    VACANCY_SAVE_BUTTON_XPATH = "//div[@id='headerOfVacancyPage']//button"
