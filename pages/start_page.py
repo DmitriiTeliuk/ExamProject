@@ -17,6 +17,7 @@ class StartPage(BasePage):
         self.wait_until_element_clickable(self.constance.LOGIN_BUTTON_XPATH).click()
         return LoginPage(self.driver)
 
+    @log_decor
     def click_agree_cookies(self):
         """Click agree cookie button on StartPage"""
         self.wait_until_element_visible(self.constance.COOKIE_AGREE_BUTTON_XPATH).click()

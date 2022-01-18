@@ -1,4 +1,5 @@
 from consts.header import HeaderConsts
+from pages.account_page import AccountPage
 from pages.base_page import BasePage
 from pages.clients_page import ClientsPage
 from pages.vacancies_page import VacanciesPage
@@ -39,3 +40,9 @@ class Header(BasePage):
         """Go to Vacancies Page"""
         self.wait_until_element_clickable(self.constance.VACANCIES_TAB_XPATH).click()
         return VacanciesPage(self.driver)
+
+    @log_decor
+    def navigate_to_account_tab(self):
+        """Go to Account Page"""
+        self.wait_until_element_clickable(self.constance.ACCOUNT_TAB_XPATH).click()
+        return AccountPage(self.driver)

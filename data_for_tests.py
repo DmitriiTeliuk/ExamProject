@@ -2,23 +2,23 @@ import random
 
 users_lst = [
     # ("d.teliuk@gmail.com", "goldenmask3421L"),
-    # ("worab68164@huekieu.com", "Qwerty123"),
-    #  ("hurzocurku@vusra.com", "qwertY123"),
-    ("gekkiromli@vusra.com", "qatest234"),
-    #  ("mostutarze@vusra.com", "qatest678")
+    ("worab68164@huekieu.com", "Qwerty123"),
+    #   ("hurzocurku@vusra.com", "qwertY123"),
+    # ("gekkiromli@vusra.com", "qatest234"),
+    # ("mostutarze@vusra.com", "qatest678")
 ]
 
 first_name_lst = ["Anna", "Olga", "Dmitrii", "Denis", "Bogdan"]
 last_name_lst = ["Tester", "Senior", "Junior", "Middle", "Teamlead"]
-position_lst = ["QA", "Team Lead", "TechRighter", "Project Manager", "Sysadmin"]
+position_lst = ["QA", "Team Lead", "TechRighter", "Project Manager", "Sys admin"]
 
 employment_status_lst = [
-    # "Full time",
-    # "Part Time",
-    # "Remote",
-    # "Internship, Practice",
+    "Full time",
+    "Part Time",
+    "Remote",
+    "Internship, Practice",
     "Temporary",
-    #  "Relocate"
+    "Relocate"
 ]
 
 country_lst = ["Algeria"]
@@ -28,28 +28,30 @@ base_text = """Welcome to the weather forecast.
         Now, let’s see what the weather is like today. 
         In the north of the country, it’s very windy and cold. 
         There is a chance of some rain too, so don’t leave home without your umbrella! 
-        The temperature is around 10º centigrade. In the east it’s rainy all day today, 
+        The temperature is around 10 degrees centigrade. In the east it’s rainy all day today, 
         I’m afraid. There may be a thunderstorm in the afternoon. 
-        The temperature is a bit higher, at around 13º.
+        The temperature is a bit higher, at around 13 degrees.
         In the west and middle of the country, the weather is dry but cloudy. 
-        So no rain for you, but it is quite windy and the temperature is just 10º. 
+        So no rain for you, but it is quite windy and the temperature is just 10 degrees. 
         The south of the country has the best weather today. 
         It’s cloudy most of the time but sunny this afternoon."""
 
 
 def generate_text(word_count):
     """Generate some string"""
-    text_lst = base_text.replace("\n", " ").split(" ")
+
+    text_lst = base_text.replace("\n", " ").replace(",", " ").replace(".", " ").split(" ")
+    lst_without_none = []
     generate_text_lst = []
-    for _ in range(word_count):
-        generate_text_lst.append(random.choice(text_lst))
-    new_generate_text_lst = []
     # Delete all '' in the list
-    for elem in generate_text_lst:
+    for elem in text_lst:
         if elem != '':
-            new_generate_text_lst.append(elem)
-    # make final sentense
-    final_generated_text = " ".join(new_generate_text_lst)
+            lst_without_none.append(elem)
+    # Randomly select {word_count} number of items from list
+    for _ in range(word_count):
+        generate_text_lst.append(random.choice(lst_without_none))
+    #  make final sentence
+    final_generated_text = " ".join(generate_text_lst)
     return final_generated_text
 
 
@@ -90,7 +92,7 @@ class Client:
 
     def generate_client_description(self):
         """Generate Client name and description for test"""
-        self.client_name = generate_text(3)
+        self.client_name = generate_text(5)
         self.client_description = generate_text(15)
 
 
@@ -112,3 +114,18 @@ class Vacancy:
         print(self.employment_type)
         print(self.country)
         print(self.city)
+
+
+class NewTag():
+    """Class contains tag name and name that will be used as new name for same tag during Tag editing process"""
+
+    def __init__(self, name="", tag_name_for_edit=""):
+        self.tag_name = name
+        self.tag_name_for_edit = tag_name_for_edit
+
+    def random_num(self):
+        return str(random.choice(range(111111, 999999)))
+
+    def generate_tag_name(self):
+        self.tag_name = f"TagNumber{self.random_num()}"
+        self.tag_name_for_edit = f"TagEdit{self.random_num()}"

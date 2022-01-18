@@ -10,6 +10,7 @@ class TestEntitiesCreation(BaseTest):
 
     @pytest.fixture(scope="function")
     def header(self, open_start_page, user_credentials):
+        """Log in to the system"""
         open_start_page.click_agree_cookies()
         login_page = open_start_page.click_login_button()
         header = login_page.successful_login_via_email(user_credentials)
@@ -17,18 +18,27 @@ class TestEntitiesCreation(BaseTest):
 
     @pytest.fixture(scope="function")
     def navigate_to_candidates(self, header):
+        """Navigate to Candidates page"""
         candidates_page = header.navigate_to_candidates_tab()
         return candidates_page
 
     @pytest.fixture(scope="function")
     def navigate_to_clients(self, header):
+        """Navigate to Clients page"""
         clients_page = header.navigate_to_clients_tab()
         return clients_page
 
     @pytest.fixture(scope="function")
     def navigate_to_vacancies(self, header):
+        """Navigate to Vacancies page"""
         vacancies_page = header.navigate_to_vacancies_tab()
         return vacancies_page
+
+    @pytest.fixture(scope="function")
+    def navigate_to_account(self, header):
+        """Navigate to Account page"""
+        account_page = header.navigate_to_account_tab()
+        return account_page
 
     @pytest.fixture(scope="function")
     def create_client_and_get_client_info(self, navigate_to_clients, new_client):
@@ -36,6 +46,13 @@ class TestEntitiesCreation(BaseTest):
         new_client_page = navigate_to_clients.click_new_client_tab()
         new_client_page.create_new_client(new_client)
         yield new_client
+
+    @pytest.fixture(scope="function")
+    def create_tag(self, navigate_to_account, new_tag):
+        """ Creates tag and returns tag info"""
+        tags_tab = navigate_to_account.click_tags_tab()
+        created_tag = tags_tab.add_tag(new_tag_name=new_tag.tag_name)
+        return created_tag
 
     def test_create_candidate(self, navigate_to_candidates, new_candidate):
         """
@@ -69,7 +86,8 @@ class TestEntitiesCreation(BaseTest):
         client_page = new_client_page.create_new_client(new_client)
         client_page.check_client_is_saved(new_client.client_name)
 
-    def test_create_new_vacancy_via_vacancies_tab(self, navigate_to_vacancies, new_vacancy):
+    def test_create_new_vacancy_via_vacancies_tab(self, create_client_and_get_client_info, navigate_to_vacancies,
+                                                  new_vacancy):
         """
         Pre-conditions:
             1. Create new Client
@@ -78,8 +96,38 @@ class TestEntitiesCreation(BaseTest):
             3.Create new vacancy for new client
             4.Verify that vacancy is created
         Expected:
-            Successful message is displayed
+            Edit vacancy page button appears
         """
         new_vacancy_page = navigate_to_vacancies.click_new_vacancy()
-        # new_vacancy_page.create_vacancy(new_vacancy, client_name="My client")
-        new_vacancy_page.create_vacancy(new_vacancy, client_name="My client")
+        vacancy_page = new_vacancy_page.create_vacancy(new_vacancy,
+                                                       client_name=create_client_and_get_client_info.client_name)
+        vacancy_page.edit_vacancy_button_is_displayed()
+
+    def test_create_tag(self, navigate_to_account, new_tag):
+        """
+        Pre-conditions:
+            1. Log in and go to Account page
+        Steps:
+            2.Go to Tags tab
+            3.Create new tag
+            4.Verify that new tag is created
+        Expected:
+            Message "New tag is saved" appears
+        """
+        tags_tab = navigate_to_account.click_tags_tab()
+        created_tag = tags_tab.add_tag(new_tag_name=new_tag.tag_name)
+        created_tag.is_tag_saved()
+
+    def test_edit_tag(self, create_tag, new_tag):
+        """
+        Pre-conditions:
+            1. Log in
+            2. Create new tag
+        Steps:
+            3.Edit tag
+            4.Verify that new tag name  is saved
+        Expected:
+            Message "New tag is saved" appears
+            """
+        tag_is_edited = create_tag.edit_tag(tag_name=new_tag.tag_name, tag_new_name=new_tag.tag_name_for_edit)
+        tag_is_edited.is_tag_edited()

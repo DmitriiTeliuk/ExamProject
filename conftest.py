@@ -4,7 +4,7 @@ import os
 import pytest
 
 from consts.base_consts import BaseConst
-from data_for_tests import User, Candidate, Client, Vacancy
+from data_for_tests import User, Candidate, Client, Vacancy, NewTag
 from pages.start_page import StartPage
 from utils import create_driver
 
@@ -63,3 +63,11 @@ class BaseTest:
         new_vacancy = Vacancy()
         new_vacancy.generate_vacancy_data()
         return new_vacancy
+
+    @pytest.fixture(scope="function")
+    def new_tag(self):
+        """Generate new tag name"""
+        new_tag = NewTag()
+        new_tag.generate_tag_name()
+        print(new_tag.tag_name_for_edit)
+        return new_tag

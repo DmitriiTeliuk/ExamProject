@@ -1,7 +1,7 @@
 from consts.vacancies_page import VacanciesPageConsts
 from pages.base_page import BasePage
 from pages.new_vacancy_page import NewVacancyPage
-from utils import log_decor
+from utils import wait_until_ok
 
 
 class VacanciesPage(BasePage):
@@ -11,7 +11,8 @@ class VacanciesPage(BasePage):
         self.constance = VacanciesPageConsts()
         self.header = Header(self.driver)
 
-    @log_decor
+    @wait_until_ok(1, 5)
+    # @log_decor
     def click_new_vacancy(self):
         """GO to New Vacancy tab"""
         self.wait_until_element_visible(self.constance.NEW_VACANCY_TAB_XPATH).click()
