@@ -23,6 +23,15 @@ class BaseTest:
     log = logging.getLogger(__name__)
 
     @pytest.fixture(scope="function")
+    def get_current_test_name(self):
+        """return test  name"""
+        full_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0]
+        test_name_and_browser = full_name.split("::")[2]
+        test_name = test_name_and_browser.split("[")[0]
+        print(f"\n {test_name} is test name")
+        return test_name
+
+    @pytest.fixture(scope="function")
     def driver(self, browser):
         """Create driver and close after tests"""
         driver = create_driver(browser=browser)
@@ -37,9 +46,9 @@ class BaseTest:
         return StartPage(driver)
 
     @pytest.fixture(scope="function")
-    def user_credentials(self):
+    def user_credentials(self, get_current_test_name):
         """Return registered user credentials"""
-        user = User()
+        user = User(test_name=get_current_test_name)
         user.fill_user_data()
         return user
 

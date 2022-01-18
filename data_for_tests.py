@@ -1,11 +1,11 @@
 import random
 
 users_lst = [
-    # ("d.teliuk@gmail.com", "goldenmask3421L"),
+    ("d.teliuk@gmail.com", "goldenmask3421L"),
     ("worab68164@huekieu.com", "Qwerty123"),
-    #   ("hurzocurku@vusra.com", "qwertY123"),
-    # ("gekkiromli@vusra.com", "qatest234"),
-    # ("mostutarze@vusra.com", "qatest678")
+    ("hurzocurku@vusra.com", "qwertY123"),
+    ("gekkiromli@vusra.com", "qatest234"),
+    ("mostutarze@vusra.com", "qatest678")
 ]
 
 first_name_lst = ["Anna", "Olga", "Dmitrii", "Denis", "Bogdan"]
@@ -57,17 +57,34 @@ def generate_text(word_count):
 
 class User:
 
-    def __init__(self, user_creds=(), user_email="", user_password=""):
+    def __init__(self, user_creds=(), user_email="", user_password="", test_name=""):
         self.user_creds = user_creds
         self.user_email = user_email
         self.user_password = user_password
+        self.test_name = test_name
 
     def fill_user_data(self):
-        """Get random pair email/password from list and set it up as users login and user password"""
-
-        self.user_creds = users_lst[random.randrange(len(users_lst))]
-        self.user_email = self.user_creds[0]
-        self.user_password = self.user_creds[1]
+        """ Set it up as users login and user password pare from list according to test name"""
+        if self.test_name == "test_create_candidate":
+            self.user_creds = users_lst[4]
+            self.user_email = self.user_creds[0]
+            self.user_password = self.user_creds[1]
+        elif self.test_name == "test_create_client":
+            self.user_creds = users_lst[3]
+            self.user_email = self.user_creds[0]
+            self.user_password = self.user_creds[1]
+        elif self.test_name == "test_create_new_vacancy_via_vacancies_tab":
+            self.user_creds = users_lst[2]
+            self.user_email = self.user_creds[0]
+            self.user_password = self.user_creds[1]
+        elif self.test_name == "test_create_tag":
+            self.user_creds = users_lst[1]
+            self.user_email = self.user_creds[0]
+            self.user_password = self.user_creds[1]
+        else:
+            self.user_creds = users_lst[0]
+            self.user_email = self.user_creds[0]
+            self.user_password = self.user_creds[1]
 
 
 class Candidate:
@@ -116,7 +133,7 @@ class Vacancy:
         print(self.city)
 
 
-class NewTag():
+class NewTag:
     """Class contains tag name and name that will be used as new name for same tag during Tag editing process"""
 
     def __init__(self, name="", tag_name_for_edit=""):
