@@ -44,7 +44,8 @@ class TestEntitiesCreation(BaseTest):
     def create_client_and_get_client_info(self, navigate_to_clients, new_client):
         """Creates new client and returns new client name and description"""
         new_client_page = navigate_to_clients.click_new_client_tab()
-        new_client_page.create_new_client(new_client)
+        client_page = new_client_page.create_new_client(new_client)
+        client_page.is_client_saved(new_client.client_name)
         yield new_client
 
     @pytest.fixture(scope="function")
@@ -67,8 +68,8 @@ class TestEntitiesCreation(BaseTest):
             6. 'Candidate is saved' message appears
         """
         add_candidate_page = navigate_to_candidates.click_add_candidate_manually()
-        candidate_page = add_candidate_page.create_candidate(new_candidate)
-        candidate_page.check_candidate_is_saved()
+        candidate_page = add_candidate_page.check_candidate_is_saved(new_candidate)
+        candidate_page.is_client_saved()
 
     def test_create_client(self, navigate_to_clients, new_client):
         """
@@ -84,7 +85,7 @@ class TestEntitiesCreation(BaseTest):
         """
         new_client_page = navigate_to_clients.click_new_client_tab()
         client_page = new_client_page.create_new_client(new_client)
-        client_page.check_client_is_saved(new_client.client_name)
+        client_page.is_client_saved(new_client.client_name)
 
     def test_create_new_vacancy_via_vacancies_tab(self, create_client_and_get_client_info, navigate_to_vacancies,
                                                   new_vacancy):

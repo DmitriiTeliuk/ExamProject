@@ -12,7 +12,7 @@ class ClientPage(BasePage):
         self.header = Header(self.driver)
 
     @log_decor
-    def check_client_is_saved(self, client_name):
+    def is_client_saved(self, client_name):
         """Check that 'Client {client_name} is saved' message appears"""
         locator = self.constance.CLIENT_SUCCESSFULLY_SAVED_MESSAGE
         message_box = self.wait_until_element_visible(locator)

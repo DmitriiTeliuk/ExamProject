@@ -128,9 +128,6 @@ class Vacancy:
         self.country = country_lst[random.randrange(len(country_lst))]
         self.city = city_lst[random.randrange(len(city_lst))]
         self.vacancy_description = base_text * 5
-        print(self.employment_type)
-        print(self.country)
-        print(self.city)
 
 
 class NewTag:

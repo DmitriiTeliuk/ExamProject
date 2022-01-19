@@ -15,7 +15,7 @@ class NewVacancyPage(BasePage):
 
     @log_decor
     def create_vacancy(self, vacancy_info, client_name):
-        """Create vacancy"""
+        """Create vacancy. Add title, client, location, employment type, descr(must be at least 800 symbols)"""
         self.wait_until_element_clickable(self.constance.NOT_IT_RADIO_BUTTON).click()
         self.fill_field(self.constance.JOB_TITLE_XPATH, vacancy_info.vacancy_title)
         self.wait_until_element_visible(self.constance.CLIENT_FIELD_XPATH).click()
@@ -35,5 +35,3 @@ class NewVacancyPage(BasePage):
         self.wait_until_element_clickable(self.constance.VACANCY_SAVE_BUTTON_XPATH).click()
         return VacancyPage(self.driver)
 
-    def click_save_vacancy_button(self):
-        self.wait_until_find_element(self.constance.VACANCY_SAVE_BUTTON_XPATH).click()

@@ -5,7 +5,6 @@ from utils import log_decor
 
 
 class StartPage(BasePage):
-    """"""
 
     def __init__(self, driver):
         super().__init__(driver)

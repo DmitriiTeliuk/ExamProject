@@ -12,7 +12,7 @@ class AddCandidateManuallyPage(BasePage):
 
     @log_decor
     def create_candidate(self, candidate):
-        """Fill new candidate info at new candidate page and click Add button"""
+        """Fill new candidate info at new candidate page and click Add candidate button"""
         from pages.candidate_page import CandidatePage
         self.fill_field(self.constance.LAST_NAME_FIELD_XPATH, some_value=candidate.first_name)
         self.fill_field(self.constance.FIRST_NAME_FIELD_XPATH, some_value=candidate.last_name)

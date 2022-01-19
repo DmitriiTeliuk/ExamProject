@@ -28,14 +28,12 @@ class BaseTest:
         full_name = os.environ.get('PYTEST_CURRENT_TEST').split(' ')[0]
         test_name_and_browser = full_name.split("::")[2]
         test_name = test_name_and_browser.split("[")[0]
-        print(f"\n {test_name} is test name")
         return test_name
 
     @pytest.fixture(scope="function")
     def driver(self, browser):
         """Create driver and close after tests"""
         driver = create_driver(browser=browser)
-        # driver.implicitly_wait(1)
         yield driver
         driver.close()
 

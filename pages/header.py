@@ -22,11 +22,7 @@ class Header(BasePage):
     def navigate_to_candidates_tab(self):
         """Go to Candidates Page"""
         from pages.candidates_page import CandidatesPage
-        # try:
         self.wait_until_element_visible(self.constance.CANDIDATES_TAB_XPATH).click()
-        # except Exception :
-        #
-        #     self.wait_until_element_visible(self.constance.CANDIDATES_TAB_IN_BURGER_MENU_XPATH).click()
         return CandidatesPage(self.driver)
 
     @log_decor

@@ -1,6 +1,7 @@
 from consts.candidate_page import CandidatePageConsts
 from pages.base_page import BasePage
 from pages.header import Header
+from utils import log_decor
 
 
 class CandidatePage(BasePage):
@@ -9,6 +10,7 @@ class CandidatePage(BasePage):
         self.constance = CandidatePageConsts()
         self.header = Header(self.driver)
 
+    @log_decor
     def check_candidate_is_saved(self):
         """Check that 'Candidate is saved' message appears"""
         message = self.wait_until_element_visible(self.constance.CANDIDATE_IS_SAVED_SUCCESSFULL_MESSAGE)
