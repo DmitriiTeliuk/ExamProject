@@ -68,8 +68,8 @@ class TestEntitiesCreation(BaseTest):
             6. 'Candidate is saved' message appears
         """
         add_candidate_page = navigate_to_candidates.click_add_candidate_manually()
-        candidate_page = add_candidate_page.check_candidate_is_saved(new_candidate)
-        candidate_page.is_client_saved()
+        candidate_page = add_candidate_page.create_candidate(new_candidate)
+        candidate_page.check_candidate_is_saved()
 
     def test_create_client(self, navigate_to_clients, new_client):
         """
