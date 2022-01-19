@@ -10,7 +10,7 @@ users_lst = [
 
 first_name_lst = ["Anna", "Olga", "Dmitrii", "Denis", "Bogdan"]
 last_name_lst = ["Tester", "Senior", "Junior", "Middle", "Teamlead"]
-position_lst = ["QA", "Team Lead", "TechRighter", "Project Manager", "Sys admin"]
+position_lst = ["QA", "Team Lead", "TechRighter", "Project Manager"]
 
 employment_status_lst = [
     "Full time",
